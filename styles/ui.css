@@ -1,0 +1,298 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    overflow-y: hidden; /* Prevent vertical overflow */
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000000;
+    color: #00ff00;
+    overflow: hidden;
+    position: relative;
+}
+
+.brightness-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.startup-sound {
+    display: none;
+}
+
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #626161;
+    color: #00ff00;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    box-shadow: 0 -2px 5px rgba(0, 255, 0, 0.5);
+    z-index: 3;
+}
+
+.taskbar .time {
+    font-size: 18px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.taskbar .icons {
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.taskbar .icons button {
+    background: none;
+    border: none;
+    color: #00ff00;
+    font-size: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.taskbar .icons button:hover {
+    color: #00cc00;
+}
+
+.display-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 40px; /* Adjust for taskbar height */
+    background-color: #000000;
+    color: #00ff00;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    z-index: 2;
+    max-width: 100vw; 
+    max-height: calc(100vh - 40px); 
+}
+
+.settings-dialog {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #000000;
+    color: #00ff00;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    z-index: 4;
+    width: 300px;
+    text-align: center;
+}
+
+.settings-dialog input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.settings-dialog label {
+    display: block;
+    margin: 10px 0;
+}
+
+.settings-dialog button {
+    background: #00cc00;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.settings-dialog button:hover {
+    background: #009900;
+}
+
+.calendar-dialog {
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: #000000;
+    color: #00ff00;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    z-index: 6;
+    width: 300px;
+    text-align: center;
+}
+
+.calendar-dialog table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.calendar-dialog table, th, td {
+    border: 1px solid #00ff00;
+}
+
+.calendar-dialog th, td {
+    padding: 5px;
+    text-align: center;
+}
+
+.calendar-dialog th {
+    background-color: #626161;
+}
+
+.calendar-dialog .current-date {
+    background-color: #00ff00;
+    color: #000000;
+}
+
+.calendar-dialog .navigation-buttons {
+    margin-top: 10px;
+}
+
+.calendar-dialog .navigation-buttons button {
+    background: #00cc00;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.calendar-dialog .navigation-buttons button:hover {
+    background: #009900;
+}
+
+#prevYear, #nextYear {
+    background: #1a3608;
+}
+
+.current-month {
+    color: #8eac06;
+}
+
+.window-frame {
+    position: absolute;
+    top: 50px;
+    max-width: 100vw;
+    max-height: calc(100vh - 40px);
+    overflow: hidden;
+    left: 50px;
+    width: 400px;
+    height: 300px;
+    background-color: #222;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    display: block;
+    resize: both; 
+    overflow: hidden;
+    z-index: 10;
+    transition: all 0.3s ease; 
+}
+
+
+.window-frame .title-bar {
+    background-color: #626161;
+    color: #00ff00;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move;
+    user-select: none;
+}
+
+
+.window-frame .title-bar .title {
+    font-size: 16px;
+}
+
+
+.window-frame .title-bar .controls {
+    display: flex;
+}
+
+
+.window-frame .title-bar .controls button {
+    background: none;
+    border: none;
+    color: #00ff00;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+
+.window-frame .content {
+    padding: 10px;
+}
+
+
+.window-frame .resize-corner {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: rgba(0, 255, 0, 0.5);
+    cursor: nwse-resize;
+    transition: background 0.2s ease; 
+}
+
+.window-frame .resize-corner:hover {
+    background: rgba(0, 255, 0, 0.8);
+}
+
+
+.window-frame.minimized {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease; 
+}
+
+
+.window-frame.maximized {
+    width: 100% !important;
+    height: calc(100% - 1px) !important;
+    top: 0;
+    left: 0;
+    border: none; 
+    box-shadow: none; 
+    transition: all 0.3s ease; 
+}

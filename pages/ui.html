@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X3NOS UI</title>
+    <link rel="stylesheet" href="../styles/ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <audio class="startup-sound" autoplay>
+        <source src="https://archive.org/download/logo_20240823/start-computeraif-14572.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="brightness-overlay" id="brightnessOverlay"></div>
+
+    <div class="taskbar">
+        <div class="time" id="taskbarTime"></div>
+        <div class="icons">
+            <!--<button id="startupMenu"><i class="fas fa-tachometer-alt"></i></button> SOON-->
+            <button id="settings"><i class="fas fa-cogs"></i></button>
+        </div>
+    </div>
+
+    <div class="display-area" id="displayArea">
+        
+    </div>
+
+    <div class="settings-dialog" id="settingsDialog">
+        <h2>Settings</h2>
+        <label for="brightness">Brightness:</label>
+        <input type="range" id="brightness" min="15" max="100" value="50">
+        <label for="volume">Sound Volume:</label>
+        <input type="range" id="volume" min="0" max="100" value="50">
+        <button id="closeSettings">Close</button>
+    </div>
+
+    <div class="calendar-dialog" id="calendarDialog">
+        <h2 id="calendarTitle">Current Month</h2>
+        <div id="calendarContent"></div>
+        <div class="navigation-buttons">
+            <button id="prevYear">&laquo; Previous Year</button>
+            <button id="nextYear">Next Year &raquo;</button>
+            <button id="prevMonth">&lsaquo; Previous Month</button>
+            <button id="nextMonth">Next Month &rsaquo;</button>
+        </div>
+    </div>
+
+    <script src="../scripts/ui.js"></script>
+</body>
+</html>
